@@ -1,0 +1,31 @@
+{
+    "name": "Unofficial ElevenLabs PHP SDK",
+    "description": "PHP SDK for the Elevenlabs API",
+    "type": "api-sdk",
+    "require": {
+        "jane-php/open-api-runtime": "^7.4",
+        "vlucas/phpdotenv": "^5.5",
+        "php-http/guzzle7-adapter": "^1.0"
+    },
+    "require-dev": {
+        "jane-php/open-api-3": "^7.4",
+        "phpunit/phpunit": "^9.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justin Maurer",
+            "email": "justin@justinmaurer.dev"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ElevenLabs\\V1\\SDK\\": "src/"
+        }
+    }
+}

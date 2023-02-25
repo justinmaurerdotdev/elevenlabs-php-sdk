@@ -1,5 +1,5 @@
 {
-    "name": "Unofficial ElevenLabs PHP SDK",
+    "name": "webusup/elevenlabs-php-sdk",
     "description": "PHP SDK for the Elevenlabs API",
     "type": "api-sdk",
     "require": {

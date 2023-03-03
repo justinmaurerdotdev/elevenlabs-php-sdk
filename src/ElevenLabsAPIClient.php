@@ -25,7 +25,7 @@ class ElevenLabsAPIClient {
 		$this->client = Client::create(null,[$base_uri_plugin]);
 		// The '4' here is the number of directory levels above the current file
 		$dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__,4));
-		$dotenv->load();
+		$dotenv->safeLoad();
 		$this->headers['xi-api-key'] = constant('ELEVENLABS_API_KEY') ?? $_ENV['ELEVENLABS_API_KEY'];
 	}
 
@@ -40,48 +40,63 @@ class ElevenLabsAPIClient {
 	public function delete_history_item(string $id) {
 		return $this->client->deleteHistoryItemV1HistoryHistoryItemIdDelete($id, $this->headers);
 	}
+
 	public function delete_sample(string $voice_id, string $sample_id) {
 		return $this->client->deleteSampleV1VoicesVoiceIdSamplesSampleIdDelete($voice_id, $sample_id, $this->headers);
 	}
+
 	public function delete_voice(string $voice_id) {
 		return $this->client->deleteVoiceV1VoicesVoiceIdDelete($voice_id, $this->headers);
 	}
+
 	public function download_history_items(BodyDownloadHistoryItemsV1HistoryDownloadPost $body) {
 		return $this->client->downloadHistoryItemsV1HistoryDownloadPost($body, $this->headers);
 	}
+
 	public function edit_voice_settings(string $voice_id, V1VoicesVoiceIdSettingsEditPostBody $body) {
 		return $this->client->editVoiceSettingsV1VoicesVoiceIdSettingsEditPost($voice_id, $body, $this->headers);
 	}
+
 	public function edit_voice(string $voice_id, BodyEditVoiceV1VoicesVoiceIdEditPost $body) {
 		return $this->client->editVoiceV1VoicesVoiceIdEditPost($voice_id, $body, $this->headers);
 	}
+
 	public function get_audio_from_history_item(string $history_item_id) {
 		return $this->client->getAudioFromHistoryItemV1HistoryHistoryItemIdAudioGet($history_item_id, $this->headers);
 	}
+
 	public function get_audio_from_sample(string $voice_id, string $sample_id) {
 		return $this->client->getAudioFromSampleV1VoicesVoiceIdSamplesSampleIdAudioGet($voice_id, $sample_id, $this->headers);
 	}
+
 	public function get_default_voice_settings() {
 		return $this->client->getDefaultVoiceSettingsV1VoicesSettingsDefaultGet();
 	}
+
 	public function get_generated_items() {
 		return $this->client->getGeneratedItemsV1HistoryGet($this->headers);
 	}
+
 	public function get_user_info() {
 		return $this->client->getUserInfoV1UserGet($this->headers);
 	}
+
 	public function get_user_subscription_info() {
 		return $this->client->getUserSubscriptionInfoV1UserSubscriptionGet($this->headers);
 	}
+
 	public function get_voices() {
 		return $this->client->getVoicesV1VoicesGet($this->headers);
 	}
+
 	public function get_voice(string $voice_id) {
 		return $this->client->getVoiceV1VoicesVoiceIdGet($voice_id, $this->headers);
 	}
+
 	public function text_to_speech(string $voice_id, BodyTextToSpeechV1TextToSpeechVoiceIdPost $body) {
-		return $this->client->textToSpeechV1TextToSpeechVoiceIdPost($voice_id, $body, $this->headers);
+		return $this->client->textToSpeechV1TextToSpeechVoiceIdPost($voice_id, $body, $this->headers, $this->client::FETCH_RESPONSE, ['audio/mpeg','application/json']);
 	}
+
 	public function text_to_speech_stream(string $voice_id, BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost $body) {
 		return $this->client->textToSpeechV1TextToSpeechVoiceIdStreamPost($voice_id, $body, $this->headers);
 	}

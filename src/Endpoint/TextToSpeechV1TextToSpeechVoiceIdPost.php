@@ -60,16 +60,18 @@ class TextToSpeechV1TextToSpeechVoiceIdPost extends \ElevenLabs\V1\SDK\Runtime\C
      *
      * @throws \ElevenLabs\V1\SDK\Exception\TextToSpeechV1TextToSpeechVoiceIdPostUnprocessableEntityException
      *
-     * @return null
+     * @return string
      */
-    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
-    {
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null): string {
         $status = $response->getStatusCode();
         $body = (string) $response->getBody();
-        if (200 === $status) {
-        }
         if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \ElevenLabs\V1\SDK\Exception\TextToSpeechV1TextToSpeechVoiceIdPostUnprocessableEntityException($serializer->deserialize($body, 'ElevenLabs\\V1\\SDK\\Model\\HTTPValidationError', 'json'), $response);
+        }
+        if (200 === $status) {
+			return $body;
+		} else {
+	        throw new \ElevenLabs\V1\SDK\Exception\TextToSpeechV1TextToSpeechVoiceIdPostUnprocessableEntityException($serializer->deserialize($body, 'ElevenLabs\\V1\\SDK\\Model\\HTTPValidationError', 'json'), $response);
         }
     }
     public function getAuthenticationScopes() : array

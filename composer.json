@@ -1,8 +1,10 @@
 {
     "name": "webusup/elevenlabs-php-sdk",
     "description": "PHP SDK for the Elevenlabs API",
-    "type": "api-sdk",
+    "type": "library",
+    "version": "1.0.0",
     "require": {
+        "php": ">=7.4.0",
         "jane-php/open-api-runtime": "^7.4",
         "vlucas/phpdotenv": "^5.5",
         "php-http/guzzle7-adapter": "^1.0"
